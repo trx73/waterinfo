@@ -1,6 +1,6 @@
 // Client-side port of kayak_tides/api.py: talks to the waterinfo.be (HIC) KIWIS
 // API directly from the browser. The API returns "Access-Control-Allow-Origin: *",
-// so no backend/proxy is needed.
+// so no backend/proxy is needed. Deployed via GitHub Pages.
 
 const HIC_BASE = "https://hicws.vlaanderen.be/KiWIS/KiWIS";
 const HIC_DATASOURCE = "4";
