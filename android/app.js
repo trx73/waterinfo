@@ -1,6 +1,6 @@
 // Client-side port of kayak_tides/api.py: talks to the waterinfo.be (HIC) KIWIS
 // API directly from the browser. The API returns "Access-Control-Allow-Origin: *",
-// so no backend/proxy is needed. Deployed via GitHub Pages.
+// so no backend/proxy is needed.
 
 const HIC_BASE = "https://hicws.vlaanderen.be/KiWIS/KiWIS";
 const HIC_DATASOURCE = "4";
@@ -103,7 +103,7 @@ function formatTime(date) {
   return `${pad2(date.getHours())}:${pad2(date.getMinutes())}`;
 }
 
-function createTidePanel(container, titleText) {
+function createTidePanel(container, titleText, defaultStationName) {
   container.innerHTML = `
     <h2>${titleText}</h2>
     <div class="field-row">
@@ -173,6 +173,8 @@ function createTidePanel(container, titleText) {
       locationSelect.innerHTML = stations
         .map((s) => `<option value="${s.tsId}">${s.name}</option>`)
         .join("");
+      const defaultStation = stations.find((s) => s.name === defaultStationName);
+      if (defaultStation) locationSelect.value = defaultStation.tsId;
       refresh();
     },
     setStatus,
@@ -182,7 +184,8 @@ function createTidePanel(container, titleText) {
 async function init() {
   const departurePanel = createTidePanel(
     document.getElementById("panel-departure"),
-    "Departure location"
+    "Departure location",
+    "Wintam Sluis Afwaarts DVW tij/Zeeschelde"
   );
   const destinationPanel = createTidePanel(
     document.getElementById("panel-destination"),
